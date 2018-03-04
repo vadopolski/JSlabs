@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        Enter String: <input id="inputString" type="text" name="FirstName" value="Mickey"><br>
+        Enter Number: <input id="inputNumber" type="number" name="Years Old" value="10"><br>
+        Enter Date: <input id="inputDate" type="date" name="Birthday" value="10.01.1984"><br>
+        Enter Boolean: <input id="inputBoolean" type="boolean" name="Is Male" value="true"><br>
+        Are you male? <input id="input" type="checkbox" name="vehicle1" value="Bike"> Yes/No
+        <br>
+        <input type="button" id="myBtn" onclick="myFunction()" value="Try it">
+        <p id="outputString"></p>
+        <p id="outputNumber"></p>
+        <p id="outputDate"></p>
+        <p id="outputBoolean"></p>
+
+    </form>
+<script>
+    function myFunction() {
+        var st = document.getElementById("inputString").value;
+        document.getElementById("outputString").innerHTML = st;
+        var num = document.getElementById("inputNumber").value;
+        document.getElementById("outputNumber").innerHTML = num;
+        var date = document.getElementById("inputDate").value;
+        document.getElementById("outputDate").innerHTML = date;
+        var bool = document.getElementById("inputBoolean").value;
+        document.getElementById("outputBoolean").innerHTML = bool;
+        var json = {num: 1, st: "test", book: true};
+        document.getElementById("outputBoolean").innerHTML = json;
+    }
+</script>
+
+</body>
+</html>
