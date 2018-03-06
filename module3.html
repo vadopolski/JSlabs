@@ -6,17 +6,21 @@
 </head>
 <body>
     <form>
-        Enter String: <input id="inputString" type="text" name="FirstName" value="Mickey"><br>
-        Enter Number: <input id="inputNumber" type="number" name="Years Old" value="10"><br>
-        Enter Date: <input id="inputDate" type="date" name="Birthday" value="10.01.1984"><br>
-        Enter Boolean: <input id="inputBoolean" type="boolean" name="Is Male" value="true"><br>
-        Are you male? <input id="input" type="checkbox" name="vehicle1" value="Bike"> Yes/No
-        <br>
+        <div style="width: 100px; overflow-x: hidden; float: left">Enter String: </div>
+        <input id="inputString" type="text" name="FirstName" value="Mickey"><br><br>
+        <div style="width: 100px; overflow-x: hidden; float: left">Enter Number: </div>
+        <input id="inputNumber" type="number" name="Years Old" value="10"><br><br>
+        <div style="width: 100px; overflow-x: hidden; float: left">Enter Date: </div>
+        <input id="inputDate" type="date" name="Birthday" value="10.01.1984"><br><br>
+        <div style="width: 100px; overflow-x: hidden; float: left">Are you male?  </div>
+        <input id="input" type="checkbox" checked="checked"> Yes/No
+        <br><br>
         <input type="button" id="myBtn" onclick="myFunction()" value="Try it">
-        <p id="outputString"></p>
-        <p id="outputNumber"></p>
-        <p id="outputDate"></p>
-        <p id="outputBoolean"></p>
+        <p id="outputString" datatype="text"></p>
+        <p id="outputNumber" datatype="text"></p>
+        <p id="outputDate" datatype="data"></p>
+        <p id="outputBoolean" datatype="boolean"></p>
+        <richtext id="richText"></richtext>
 
     </form>
 <script>
@@ -27,10 +31,11 @@
         document.getElementById("outputNumber").innerHTML = num;
         var date = document.getElementById("inputDate").value;
         document.getElementById("outputDate").innerHTML = date;
-        var bool = document.getElementById("inputBoolean").value;
+//        var bool = document.getElementById("input").value;
+        var bool = 1 == 2;
         document.getElementById("outputBoolean").innerHTML = bool;
-        var json = {num: 1, st: "test", book: true};
-        document.getElementById("outputBoolean").innerHTML = json;
+        var json = {num: num, st: st, bool: bool};
+        document.getElementById("richText").innerHTML = json;
     }
 </script>
 
