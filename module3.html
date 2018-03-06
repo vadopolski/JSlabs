@@ -34,8 +34,8 @@
 //        var bool = document.getElementById("input").value;
         var bool = 1 == 2;
         document.getElementById("outputBoolean").innerHTML = bool;
-        var json = {num: num, st: st, bool: bool};
-        document.getElementById("richText").innerHTML = json;
+        var json = {num: num, st: st, date: date , bool: bool};
+        document.getElementById("richText").innerHTML = JSON.stringify(json);
     }
 </script>
 
