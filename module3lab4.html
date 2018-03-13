@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    Name: <input id="name" type="text"  onblur="validationName()" value="">
+    <div id="textArea"></div><br>
+    Full age: <input id="age" type="number" value=""><br>
+    Date of completion: <input id="date" type="date" value=""><br>
+    Do you agree the processing of personal data? <input id="yes" type="checkbox" checked="checked"> Yes<br>
+    <input id="but" type="button" onclick="myFunction()" value="send">
+    <p id="outputString" datatype="text"></p>
+    <p id="outputNumber" datatype="text"></p>
+    <p id="outputDate" datatype="text"></p>
+    <p id="outputBool" datatype="text"></p>
+</form>
+<script>
+
+    function validationName() {
+        var re = new RegExp("[a]");
+        var text = document.getElementById("name").value
+        if (re.test(text)==false){
+            var para = document.createElement("p");
+            var node = document.createTextNode("Please, enter right name");
+            para.appendChild(node);
+
+            document.getElementById("textArea").appendChild(para);
+
+            var element = document.getElementById("name");
+            var child = document.getElementById("p1");
+//            element.nextSibling(para, child);
+        }
+    }
+    function myFunction() {
+        var n = document.getElementById("name").value;
+        document.getElementById("outputString").innerHTML = n;
+        var a = document.getElementById("age").value;
+        document.getElementById("outputNumber").innerHTML = a;
+        var d = document.getElementById("date").value;
+        document.getElementById("outputDate").innerHTML = d;
+        var y = Boolean(document.getElementById("yes").checked);
+        document.getElementById("outputBool").innerHTML = y;
+        var json = {"Name":n, "Full age":a, "Date of completion":d, "Agreement":y};
+        document.getElementById("demo").innerHTML = JSON.stringify(json);
+        /* var obj = JSON.stringify('{ "Name":n, "Full age":a, "Date of completion":d, "Agreemant":y}');
+         for (x in obj) {
+             document.getElementById("demo").innerHTML += x + ": " + obj[x]+ "<br>"}*/
+    }
+</script>
+<reachtext id="demo"></reachtext>
+</body>
+

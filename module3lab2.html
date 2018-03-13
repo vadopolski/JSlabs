@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        <p>
+            <label>
+                How old are you!
+                <input id="yearsOld" type="number"/>
+            </label>
+        </p>
+        <input id="writeBiography" type="button" value="Write biography!"/>
+        <div id="textArea"></div>
+        <br>
+    </form>
+    <script>
+        function generateForm() {
+            var yearsOld = document.getElementById("yearsOld").value;
+            var element = document.createElement("p");
+            element.innerHTML = "You are " + yearsOld + " years old. " +
+                "Write please the most inportant event in your life, when you was:";
+            document.getElementById("textArea").appendChild(element);
+
+            for(i = 3; i <= yearsOld; i++){
+                var label = document.createElement("label");
+                label.innerHTML = i + " years old ";
+                var inputEvent = document.createElement("input");
+                inputEvent.setAttribute("type", "text");
+                label.appendChild(inputEvent);
+                label.appendChild(document.createElement("br"));
+                label.appendChild(document.createElement("br"));
+                document.getElementById("textArea").appendChild(label);
+            }
+
+            document.getElementById("writeBiography").removeEventListener("click", generateForm);
+            document.getElementById("writeBiography").value = "Generate biography!";
+
+            document.getElementById("writeBiography").addEventListener("click", generateBiography);
+        }
+
+        function generateBiography() {
+            alert("New Functionality!")
+        }
+        document.getElementById("writeBiography").addEventListener("click", generateForm);
+
+    </script>
+</body>
+</html>

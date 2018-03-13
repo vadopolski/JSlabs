@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binding Events with JQuery.</title>
+    <script type="text/javascript" src="Scripts/jquery-1.8.0.js"></script>
+</head>
+<body>
+    <form>
+        <label>Enter your Name: <input type="text" id="InputName">
+        </label>
+        <input type="button" id="submit" value="Click to Submit.">
+    </form>
+        <div id="thankYouArea"> Text Text</div>
+        <div id="thankYouArea2"> Text Text</div>
+        <div id="thankYouArea3"> Text Text</div>
+        <ul>
+        </ul>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#submit").click(
+                function () {
+                    var userName = $("#InputName").val();
+                    $("#thankYouArea").replaceWith("<p> Thank You " + userName + "</p>");
+                });
+//            $("div").each(function(){
+//                this.style.color = "Red";});
+//            $("div").eq(1).css("color", "Red");
+//            $("form").find("input[type=text]").css("color", "Red")
+//            $("div:first").css("color", "Red");
+
+//            $("div").addClass("strike");
+//            $(".strike:first").css("color", "Red");
+
+            $("ul").append("<li>Append new item 1</li>");
+            $("ul").append("<li>Append new item 2</li>");
+
+            //!!!!!!!!!!!!!!! Find and replace.
+//            $("div").filter($(":first")).css("color", "Red");
+
+
+        })
+    </script>
+</body>
+</html>
