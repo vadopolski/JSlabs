@@ -5,37 +5,84 @@
     <title>Title</title>
 </head>
 <body>
-    <form>
-        <div style="width: 100px; overflow-x: hidden; float: left">Enter String: </div>
-        <input id="inputString" type="text" name="FirstName" value="Mickey"><br><br>
-        <div style="width: 100px; overflow-x: hidden; float: left">Enter Number: </div>
-        <input id="inputNumber" type="number" name="Years Old" value="10"><br><br>
-        <div style="width: 100px; overflow-x: hidden; float: left">Enter Date: </div>
-        <input id="inputDate" type="date" name="Birthday" value="10.01.1984"><br><br>
-        <div style="width: 100px; overflow-x: hidden; float: left">Are you male?  </div>
-        <input id="input" type="checkbox" checked="checked"> Yes/No<br><br>
-        <input type="button" id="myBtn" onclick="myFunction()" value="Try it">
-        <p id="outputString" datatype="text"></p>
-        <p id="outputNumber" datatype="text"></p>
-        <p id="outputDate" datatype="data"></p>
-        <p id="outputBoolean" datatype="boolean"></p>
-        <richtext id="richText"></richtext>
+<form id="mainForm">
+        <span id="textInput">
+            <span style="width: 100px; overflow-x: hidden; float: left">Enter String: </span>
+            <input id="inputString" type="text" name="FirstName" value="Mickey" onblur="myFunction()">
+        </span><br><br>
+        <span id="number">
+            <span style="width: 100px; overflow-x: hidden; float: left;">Enter Number: </span>
+            <input id="inputNumber" type="number" name="Years Old" value="10"><br><br>
+        </span>
+        <span>
+            <span style="width: 100px; overflow-x: hidden; float: left">Enter Date: </span>
+            <input id="inputDate" type="date" name="Birthday" value="10.01.1984"><br><br>
+        </span>
+        <span>
+            <span style="width: 100px; overflow-x: hidden; float: left">Are you male?  </span>
+            <input id="inputCheckBox" type="checkbox"> Yes/No<br><br>
+        </span>
+        <span>
+            <input type="button" id="myBtn" onclick="myFunction()" value="Try it">
+        </span>
 
-    </form>
+    <p id="outputString" datatype="text"></p>
+    <p id="outputNumber" datatype="text"></p>
+    <p id="outputDate" datatype="data"></p>
+    <p id="outputBoolean" datatype="boolean"></p>
+    <richtext id="richText"></richtext>
+</form>
 <script>
     function myFunction() {
         var st = document.getElementById("inputString").value;
-        document.getElementById("outputString").innerHTML = st;
         var num = document.getElementById("inputNumber").value;
-        document.getElementById("outputNumber").innerHTML = num;
         var date = document.getElementById("inputDate").value;
-        document.getElementById("outputDate").innerHTML = date;
-//        var bool = document.getElementById("input").value;
-        var bool = 1 == 2;
-        document.getElementById("outputBoolean").innerHTML = bool;
-        var json = {num: num, st: st, date: date , bool: bool};
+        var checked = document.getElementById("inputCheckBox").checked;
+        var json = {num: num, st: st, date: date, bool: checked};
         document.getElementById("richText").innerHTML = JSON.stringify(json);
+
+        var form = document.getElementById("textInput");
+        var childCount = document.getElementById("textInput").childElementCount;
+
+        if (childCount > 2) {
+            getFilledElement(form.lastChild, checkName(st));
+        } else {
+            var newItem = document.createElement("span");
+            getFilledElement(newItem, checkName(st));
+            form.appendChild(newItem);
+        }
+    };
+
+    function getFilledElement(child, st) {
+        if(st == ""){
+            child.innerHTML = "&nbsp;&nbsp;&nbsp;InCorrect";
+            child.setAttribute("style", "color: coral");
+        } else {
+            child.innerHTML = "&nbsp;&nbsp;&nbsp;Correct";
+            child.setAttribute("style", "color: chartreuse");
+        }
+
+        return child;
     }
+
+    function checkName(st) {
+        var patt = new RegExp("^[A-Z]+[a-z]{0,10}$");
+        var res = patt.test(st);
+        return res;
+    }
+
+    function checkDate() {
+
+    }
+    function checkNumber() {
+
+    }
+    function checkNumber() {
+
+    }
+
+
+
 </script>
 
 </body>
