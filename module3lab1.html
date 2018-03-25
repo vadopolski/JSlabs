@@ -6,25 +6,32 @@
 </head>
 <body>
 <form id="mainForm">
-        <span id="textInput">
-            <span style="width: 100px; overflow-x: hidden; float: left">Enter String: </span>
-            <input id="inputString" type="text" name="FirstName" value="Mickey" onblur="myFunction()">
-        </span><br><br>
-        <span id="number">
-            <span style="width: 100px; overflow-x: hidden; float: left;">Enter Number: </span>
-            <input id="inputNumber" type="number" name="Years Old" value="10"><br><br>
+        <span id="string">
+            <span id="stringLabel" style="width: 100px; overflow-x: hidden; float: left">Enter String: </span>
+            <input id="stringInput" type="text" name="FirstName" value="Mickey" onblur="validate(stringID, stringSpanPattern)">
         </span>
+        <br><br>
+        <span id="number">
+            <span id="numberLabel" style="width: 100px; overflow-x: hidden; float: left;">Enter Number: </span>
+            <input id="numberInput" type="number" name="Age: " onblur="validate(numberID, numberSpanPattern)">
+        </span>
+        <br><br>
+        <span id="email">
+            <span id="emailLabel" style="width: 100px; overflow-x: hidden; float: left;">Enter Email: </span>
+            <input id="emailInput" type="text" name="Email" value="test@test.te" onblur="validate(emailID, emailSpanPattern)">
+        </span>
+        <br><br>
         <span>
             <span style="width: 100px; overflow-x: hidden; float: left">Enter Date: </span>
-            <input id="inputDate" type="date" name="Birthday" value="10.01.1984"><br><br>
-        </span>
+            <input id="inputDate" type="date" name="Birthday" value="10.01.1984">
+        </span><br><br>
         <span>
             <span style="width: 100px; overflow-x: hidden; float: left">Are you male?  </span>
-            <input id="inputCheckBox" type="checkbox"> Yes/No<br><br>
-        </span>
+            <input id="inputCheckBox" type="checkbox"> Yes/No
+        </span><br><br>
         <span>
             <input type="button" id="myBtn" onclick="myFunction()" value="Try it">
-        </span>
+        </span><br><br>
 
     <p id="outputString" datatype="text"></p>
     <p id="outputNumber" datatype="text"></p>
@@ -33,28 +40,55 @@
     <richtext id="richText"></richtext>
 </form>
 <script>
+
+    var numberID = "number";
+    var numberSpanPattern = "^[0-9]{3,9}$";
+    var stringID = "string";
+    var stringSpanPattern = "^[A-Z]+[a-z]{0,10}$";
+    var emailID = "email";
+    var emailSpanPattern = "^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$";
+
     function myFunction() {
-        var st = document.getElementById("inputString").value;
-        var num = document.getElementById("inputNumber").value;
-        var date = document.getElementById("inputDate").value;
-        var checked = document.getElementById("inputCheckBox").checked;
-        var json = {num: num, st: st, date: date, bool: checked};
-        document.getElementById("richText").innerHTML = JSON.stringify(json);
+//        var date = document.getElementById("inputDate").value;
+//        var checked = document.getElementById("inputCheckBox").checked;
+//        var json = {num: num, st: st, date: date, bool: checked};
+//        document.getElementById("richText").innerHTML = JSON.stringify(json);
+        document.getElementById("mainForm").appendChild(generateInput("string1", "text"));
 
-        var form = document.getElementById("textInput");
-        var childCount = document.getElementById("textInput").childElementCount;
-
-        if (childCount > 2) {
-            getFilledElement(form.lastChild, checkName(st));
-        } else {
-            var newItem = document.createElement("span");
-            getFilledElement(newItem, checkName(st));
-            form.appendChild(newItem);
-        }
     };
 
-    function getFilledElement(child, st) {
-        if(st == ""){
+    function generateInput(idName, type) {
+        var parent = document.createElement("span");
+        parent.setAttribute("id", idName);
+        var label = document.createElement("span");
+        label.setAttribute("id", idName + "Label" );
+        label.setAttribute("style", "width: 100px; overflow-x: hidden; float: left");
+        label.innerHTML = idName;
+        var input = document.createElement("input");
+        input.setAttribute("id", idName + "Input");
+        input.setAttribute("type", type);
+        parent.appendChild(label);
+        parent.appendChild(input);
+        return parent;
+    }
+
+    function validate(id, regExp) {
+        var parent = document.getElementById(id);
+        var inputValue = document.getElementById(id + "Input").value;
+        var childAfter = document.getElementById(id + "After");
+
+        if (childAfter != null) {
+            updateFilledElement(parent.lastChild, checkValue(inputValue, regExp));
+        } else {
+            var newItem = document.createElement("span");
+            newItem.setAttribute("id", id + "After");
+            updateFilledElement(newItem, checkValue(inputValue, regExp));
+            parent.appendChild(newItem);
+        }
+    }
+
+    function updateFilledElement(child, st) {
+        if(st == false){
             child.innerHTML = "&nbsp;&nbsp;&nbsp;InCorrect";
             child.setAttribute("style", "color: coral");
         } else {
@@ -65,24 +99,11 @@
         return child;
     }
 
-    function checkName(st) {
-        var patt = new RegExp("^[A-Z]+[a-z]{0,10}$");
+    function checkValue(st, regExp) {
+        var patt = new RegExp(regExp);
         var res = patt.test(st);
         return res;
     }
-
-    function checkDate() {
-
-    }
-    function checkNumber() {
-
-    }
-    function checkNumber() {
-
-    }
-
-
-
 </script>
 
 </body>
