@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>onblur event example</title>
+
+    <script type="text/javascript">
+
+        var elem = null;
+
+        function initElement()
+        {
+            elem = document.getElementById("foo");
+            // NOTE: doEvent(); or doEvent(param); will NOT work here.
+            // Must be a reference to a function name, not a function call.
+            elem.onblur = doEvent;
+        };
+
+        function doEvent()
+        {
+            elem.value = 'Bye-Bye';
+            console.log("onblur Event detected!")
+        }
+    </script>
+
+</head>
+
+<body onload="initElement();">
+<form>
+    <input type="text" id="foo" value="Hello!" />
+</form>
+
+<p>Click on the above element to give it focus, then click outside the
+    element.<br /> Reload the page from the NavBar.</p>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="click-wrap">
+        <button>Click me one: 0</button>
+        <input type="text">
+        <span>Text1</span>
+        <br>
+        <br>
+        <button>Click me two: 0</button>
+        <input type="text">
+        <span>Text2</span>
+        <br>
+        <br>
+        <button>Click me three: 0</button>
+        <input type="text">
+        <span>Text3</span>
+        <br>
+        <br>
+    </div>
+
+    <script>
+        function onBlurHandling() {
+            alert("test");
+        }
+
+        function myHandler(e) {
+
+            var src, parts;
+
+            // get event and source element
+            e = e || window.event;
+            src = e.target || e.srcElement;
+
+            // actual work: update label
+            parts = src.innerHTML.split(": ");
+            parts[1] = parseInt(parts[1], 10) + 1;
+            src.innerHTML = parts[0] + ": " + parts[1];
+
+            // no bubble
+            if (typeof e.stopPropagation === "function") {
+                e.stopPropagation();
+            }
+            e.cancelBubble = true;
+
+            // prevent default action
+            if (typeof e.preventDefault === "function") {
+                e.preventDefault();
+            }
+            e.returnValue = false;
+
+        }
+
+        var el = document.getElementById('click-wrap');
+        if (document.addEventListener) { // W3C
+            el.addEventListener('click', onBlurHandling, false);
+        }
+//        else { // last resort
+//            el.onclick = myHandler;
+//        }
+
+    </script>
+</body>
+</html>
